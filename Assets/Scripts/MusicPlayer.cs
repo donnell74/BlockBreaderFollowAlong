@@ -7,7 +7,7 @@ public class MusicPlayer : MonoBehaviour {
     private static MusicPlayer musicPlayerInstance = null;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         if (musicPlayerInstance != null) {
             Destroy(gameObject);
             Debug.Log("Duplicate music player destroyed!");
