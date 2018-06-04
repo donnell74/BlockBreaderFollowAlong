@@ -19,17 +19,11 @@ public class Brick : MonoBehaviour {
 		
 	}
 
-    private void OnCollisionEnter2D(Collision2D collision) {
+    private void OnCollisionExit2D(Collision2D collision) {
         timesHit += 1;
-        Debug.Log("Times hit: " + timesHit);
 
         if (timesHit >= maxHits) {
-            SimiulateWin();
+            Destroy(gameObject);
         }
-    }
-
-    // TODO Remoe this method once we can actually win!
-    private void SimiulateWin() {
-        levelManager.NextLevel();
     }
 }
