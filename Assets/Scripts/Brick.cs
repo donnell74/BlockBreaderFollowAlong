@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class Brick : MonoBehaviour {
 
+	public static int breakableCount = 0;
+
     public Sprite[] hitSprites;
 
     private int timesHit;
     private LevelManager levelManager;
+	private bool isBreakable;
 
 	// Use this for initialization
 	void Start () {
         timesHit = 0;
         levelManager = GameObject.FindObjectOfType<LevelManager>();
+        isBreakable = (this.tag == "Breakable");
+        if (isBreakable) {
+	        breakableCount += 1;
+	    }
 	}
 	
 	// Update is called once per frame
@@ -21,7 +28,6 @@ public class Brick : MonoBehaviour {
 	}
 
     private void OnCollisionExit2D(Collision2D collision) {
-    	bool isBreakable = (this.tag == "Breakable");
     	if (isBreakable) {
 	    	HandleHits();
 	    }
@@ -32,6 +38,8 @@ public class Brick : MonoBehaviour {
         timesHit += 1;
 
         if (timesHit >= maxHits) {
+        	breakableCount -= 1;
+        	levelManager.BrickDestroyed();
             Destroy(gameObject);
         } else {
         	LoadSprites();

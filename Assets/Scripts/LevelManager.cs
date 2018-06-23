@@ -18,4 +18,10 @@ public class LevelManager : MonoBehaviour {
     public void NextLevel() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
+    public void BrickDestroyed() {
+        if (Brick.breakableCount <= 0) {
+            NextLevel();
+        }
+    }
 }
