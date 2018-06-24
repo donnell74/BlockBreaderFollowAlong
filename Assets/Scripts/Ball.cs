@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class Ball : MonoBehaviour {
 
@@ -24,6 +25,12 @@ public class Ball : MonoBehaviour {
                 ballLaunched = true;
                 this.GetComponent<Rigidbody2D>().velocity = new Vector2 (2f, 10f);
             }
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision) {
+        if (ballLaunched) {
+            GetComponent<AudioSource>().Play();
         }
     }
 }
